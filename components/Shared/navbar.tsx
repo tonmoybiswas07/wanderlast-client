@@ -11,9 +11,11 @@ import Wanderlast from "@/app/images/Wanderlast.png"
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Destinations", href: "#destinations" },
+  { label: "Destinations", href: "/destinations" },
+  {label:"add-destination", href:"/add-destination"},
+
   { label: "My Bookings", href: "#bookings" },
-  { label: "Admin", href: "#admin" },
+  
 ]
 
 const authLinks = [
