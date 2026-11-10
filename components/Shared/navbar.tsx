@@ -19,8 +19,8 @@ const navLinks = [
 ]
 
 const authLinks = [
-  { label: "Login", href: "#login" },
-  { label: "Sign Up", href: "#signup" },
+  { label: "Login", href: "/auth/signin" },
+  { label: "Sign Up", href: "/auth/signup" },
 ]
 
 const linkClass =
