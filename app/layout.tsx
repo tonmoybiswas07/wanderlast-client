@@ -4,8 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
-import { Navbar } from "@/components/Shared/navbar";
+
 import Footer from "@/components/Shared/footer";
+import { Navbar } from "@/components/Shared/navbar";
 
 const josefinSans = Josefin_Sans({
   subsets: ["latin"],
