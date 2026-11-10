@@ -1,11 +1,10 @@
-
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { FormEvent, ChangeEvent } from "react";
 
-import type { Destination } from "./DestinationCard";
+import type { Destination } from "../DestinationCard/DestinationCard";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -81,9 +80,15 @@ const EditDestinationDialog = ({
       "",
   });
 
+  // Track open state changes via ref
+  const openRef = useRef(false);
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
   // Load latest destination data whenever dialog opens
   useEffect(() => {
-    if (open) {
+    if (openRef.current) {
       setFormData({
         destination:
           currentDestination.destination ||
@@ -111,7 +116,7 @@ const EditDestinationDialog = ({
       setError("");
       setSuccess("");
     }
-  }, [open, destination]);
+  }, []);
 
   // Handle input changes
   const handleChange = (
@@ -134,7 +139,7 @@ const EditDestinationDialog = ({
     try {
       setLoading(true);
       setError("");
-      setSuccess("");
+setSuccess("");
 
       if (!destination._id) {
         throw new Error("Destination ID not found");
@@ -192,7 +197,7 @@ const EditDestinationDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger>
         <button
           type="button"
           className="rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-teal-700"
@@ -258,7 +263,7 @@ const EditDestinationDialog = ({
                 onValueChange={(value) =>
                   setFormData((prev) => ({
                     ...prev,
-                    category: value,
+                    category: value || "",
                   }))
                 }
               >

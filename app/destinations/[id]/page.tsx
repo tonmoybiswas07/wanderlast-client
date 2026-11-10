@@ -469,7 +469,6 @@ const DestinationDetailsPage = async ({
 
                 {/* Booking Button */}
                 <Button
-                  asChild
                   className="h-13 w-full rounded-xl bg-teal-600 text-base font-bold text-white shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
                 >
                   <Link href={`/booking/${data._id}`}>

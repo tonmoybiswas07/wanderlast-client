@@ -239,7 +239,7 @@ const AddDestinationPage = () => {
                   </Label>
                   <Select
                     value={category}
-                    onValueChange={setCategory}
+                    onValueChange={(value) => setCategory(value || "")}
                   >
                     <SelectTrigger className={`${inputClass} w-full`}>
                       <div className="flex items-center gap-3">

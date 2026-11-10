@@ -119,7 +119,6 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
       <CardFooter className="p-5 pt-0">
         
         <Button
-          asChild
           className="h-11 w-full rounded-xl bg-[#1ba0b9] font-semibold text-white transition-all hover:bg-[#168ba2]"
         >
           <Link href={`/destinations/${destination._id}`}>
