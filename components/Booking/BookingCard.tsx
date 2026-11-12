@@ -76,33 +76,42 @@ const BookingCard = ({ data }: BookingCardProps) => {
       setBookingMessage("");
       setBookingSuccess(false);
 
-     
-const bookingData = {
-  // User Information
-  user: {
-    userId: user.id,
-    name: user.name,
-    email: user.email,
-    image: user.image ?? "",
-  },
+      // Get authentication token
+      const { data: tokenData, error: tokenError } =
+        await authClient.token();
 
-  // Complete Destination Information
-  destination: {
-    ...data,
-  },
-  
+      if (tokenError || !tokenData?.token) {
+        throw new Error("Unable to get authentication token. Please login again.");
+      }
 
-  // Booking Information
-  departureDate,
-  status: "Pending",
-};
-console.log(data)
+      const jwtToken = tokenData.token;
 
+      // Prepare booking information
+      const bookingData = {
+        // User Information
+        user: {
+          userId: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image ?? "",
+        },
 
-      const res = await fetch("http://localhost:8000/booking", {
+        // Complete Destination Information
+        destination: {
+          ...data,
+        },
+
+        // Booking Information
+        departureDate,
+        status: "Pending",
+      };
+
+      // Send booking request
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/booking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
         },
         body: JSON.stringify(bookingData),
       });
@@ -262,7 +271,12 @@ console.log(data)
             {/* Booking Button */}
             <Button
               onClick={handleBooking}
-              disabled={bookingLoading || isPending || !user || !departureDate}
+              disabled={
+                bookingLoading ||
+                isPending ||
+                !user ||
+                !departureDate
+              }
               className="h-13 w-full rounded-xl bg-teal-600 text-base font-bold text-white shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
             >
               {bookingLoading ? (

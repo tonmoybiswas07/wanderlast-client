@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Save, Loader2 } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 // Support both MongoDB field names and Details page aliases
 type DestinationFormData = Destination & {
@@ -122,6 +123,7 @@ const EditDestinationDialog = ({
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    
     const { name, value } = e.target;
 
     setFormData((prev) => ({
@@ -159,13 +161,16 @@ setSuccess("");
         imageUrl: formData.imageUrl.trim(),
         description: formData.description.trim(),
       };
-
+ const { data, error } = await authClient.token()
+  
+    const jwtToken = data?.token
       const res = await fetch(
-        `http://localhost:8000/destinations/${destination._id}`,
+        `${process.env.NEXT_PUBLIC_API_URI}/destinations/${destination._id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwtToken}`
           },
           body: JSON.stringify(updatedDestination),
         }

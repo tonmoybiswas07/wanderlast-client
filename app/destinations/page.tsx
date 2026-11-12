@@ -18,7 +18,7 @@ const DestinationPage = async () => {
   let data: Destination[] = [];
 
   try {
-    const res = await fetch("http://localhost:8000/destinations", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/destinations`, {
       cache: "no-store",
     });
 

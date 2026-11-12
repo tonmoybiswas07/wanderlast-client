@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 interface Booking {
   _id: string;
@@ -64,6 +65,9 @@ const MyBooking = ({ booking ,onDeleted}: MyBookingProps) => {
 
   // Delete Booking
  const handleCancelBooking = async (id: string) => {
+   const { data, error } = await authClient.token()
+    
+      const jwtToken = data?.token
   const confirmCancel = window.confirm(
     "Are you sure you want to cancel this booking?"
   );
@@ -74,9 +78,12 @@ const MyBooking = ({ booking ,onDeleted}: MyBookingProps) => {
     setIsDeleting(true);
 
     const res = await fetch(
-      `http://localhost:8000/booking/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URI}/booking/${id}`,
       {
         method: "DELETE",
+        headers:{
+          "Authorization": `Bearer ${jwtToken}`
+        }
       }
     );
 

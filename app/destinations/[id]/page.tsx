@@ -48,7 +48,7 @@ if (!jwtToken?.token) {
 }
 
 const res = await fetch(
-  `http://localhost:8000/destinations/${id}`,
+  `${process.env.NEXT_PUBLIC_API_URI}/destinations/${id}`,
   {
     cache: "no-store",
     headers: {

@@ -16,18 +16,27 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+import { authClient } from "@/lib/auth-client";
+
 const DeleteDestination = ({ _id }: { _id: string }) => {
     console.log(_id)
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
  const handleDeleteDestination = async () => {
+  const { data, error } = await authClient.token()
+  
+    const jwtToken = data?.token
   try {
     const res = await fetch(
-      `http://localhost:8000/destinations/${_id}`,
+      `${process.env.NEXT_PUBLIC_API_URI}/destinations/${_id}`,
       {
         method: "DELETE",
-      }
+        headers:{
+Authorization: `Bearer ${jwtToken}`
+        }
+      },
+     
     );
 
     const data = await res.json();

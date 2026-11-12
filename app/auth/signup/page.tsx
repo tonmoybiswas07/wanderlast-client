@@ -111,11 +111,13 @@ toast.success("Account created successfully! Please sign in.")
 setTimeout(() => {
   router.push("/auth/signin")
 }, 1500)
+if (error) {
+  const errorMessage =
+    (error as { message?: string }).message || "Signup failed.";
 
-      if (error) {
-        toast.error(error.message || "Signup failed.")
-        return
-      }
+  toast.error(errorMessage);
+  return;
+}
 
       toast.success("Account created successfully!")
      

@@ -72,7 +72,7 @@ const AddDestinationPage = () => {
 
     try {
       const res = await fetch(
-        "http://localhost:8000/add-destination",
+        `${process.env.NEXT_PUBLIC_API_URI}/add-destination`,
         {
           method: "POST",
           headers: {
