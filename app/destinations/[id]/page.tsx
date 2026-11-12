@@ -4,21 +4,21 @@ import Link from "next/link";
 
 import {
   ArrowLeft,
-  ArrowRight,
+ 
   CalendarDays,
-  CheckCircle2,
+  
   Clock3,
   Globe2,
   MapPin,
   ShieldCheck,
   Sparkles,
   Tag,
-  HeartHandshake,
+  
   Headset,
   Wallet,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+
 
 import {
   Card,
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/card";
 import EditDestinationDialog from "@/components/EditDestinationDialog/EditDestinationDialog";
 import DeleteDestination from "@/components/DeleteDestination/DeleteDestination";
+import BookingCard from "@/components/Booking/BookingCard";
 
 
 
@@ -87,11 +88,7 @@ const DestinationDetailsPage = async ({
     },
   ];
 
-  const bookingBenefits = [
-    "Easy and secure booking",
-    "Dedicated travel support",
-    "Memorable travel experience",
-  ];
+
 
   return (
     <main className="min-h-screen bg-[#f5f8fa] pb-20">
@@ -385,138 +382,7 @@ const DestinationDetailsPage = async ({
           </div>
 
           {/* Right Booking Card */}
-          <aside className="lg:sticky lg:top-24">
-
-            <Card className="overflow-hidden rounded-3xl border border-slate-100 bg-white py-0 shadow-xl">
-
-              {/* Price Header */}
-              <div className="relative overflow-hidden bg-gradient-to-br from-teal-600 to-cyan-500 p-7 text-white">
-
-                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/10" />
-
-                <div className="relative">
-
-                  <div className="flex items-center gap-2 text-sm font-medium text-white/80">
-                    <Sparkles size={16} />
-                    Your next adventure starts here
-                  </div>
-
-                  <p className="mt-5 text-sm text-white/80">
-                    Starting from
-                  </p>
-
-                  <h2 className="mt-1 text-4xl font-extrabold">
-                    ${data.price}
-                  </h2>
-
-                  <p className="mt-1 text-sm text-white/75">
-                    Per person
-                  </p>
-
-                  <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-sm backdrop-blur-md">
-                    <Tag size={15} />
-                    {data.category} Package
-                  </div>
-
-                </div>
-              </div>
-
-              <CardContent className="space-y-6 p-6">
-
-                {/* Departure Date */}
-                <div className="flex items-center justify-between gap-3 rounded-2xl bg-slate-50 p-4">
-
-                  <div className="flex items-center gap-3">
-
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-100 text-teal-700">
-                      <CalendarDays size={21} />
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-slate-500">
-                        Departure Date
-                      </p>
-
-                      <p className="mt-1 text-sm font-bold text-slate-900">
-                        {formattedDate}
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Duration */}
-                <div className="flex items-center justify-between gap-3 rounded-2xl bg-slate-50 p-4">
-
-                  <div className="flex items-center gap-3">
-
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
-                      <Clock3 size={21} />
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-slate-500">
-                        Trip Duration
-                      </p>
-
-                      <p className="mt-1 text-sm font-bold text-slate-900">
-                        {data.duration}
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Booking Button */}
-                <Button
-                  className="h-13 w-full rounded-xl bg-teal-600 text-base font-bold text-white shadow-lg shadow-teal-600/20 transition hover:bg-teal-700"
-                >
-                  <Link href={`/booking/${data._id}`}>
-                    Book This Trip
-                    <ArrowRight size={19} />
-                  </Link>
-                </Button>
-
-                {/* Benefits */}
-                <div className="space-y-4 border-t border-slate-100 pt-5">
-
-                  {bookingBenefits.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-3 text-sm text-slate-600"
-                    >
-                      <CheckCircle2
-                        size={17}
-                        className="shrink-0 text-teal-600"
-                      />
-
-                      {item}
-                    </div>
-                  ))}
-
-                </div>
-
-                {/* Help Box */}
-                <div className="rounded-2xl bg-teal-50 p-4 text-center">
-
-                  <HeartHandshake
-                    size={25}
-                    className="mx-auto text-teal-600"
-                  />
-
-                  <p className="mt-2 text-sm font-bold text-slate-800">
-                    Need help planning your trip?
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-500">
-                    Our team is ready to help you.
-                  </p>
-
-                </div>
-
-              </CardContent>
-            </Card>
-          </aside>
+         <BookingCard data={data}/>
         </div>
       </div>
     </main>

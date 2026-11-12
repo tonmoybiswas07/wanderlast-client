@@ -198,12 +198,12 @@ setSuccess("");
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <button
+        <Button
           type="button"
           className="rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-teal-700"
         >
           Edit Destination
-        </button>
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[700px]">
