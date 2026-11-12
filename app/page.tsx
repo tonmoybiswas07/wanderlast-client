@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/Shared/navbar"
+
 import { Banner } from "@/components/banner"
 import { WhyChoose } from "@/components/why-choose"
 import Testimonials from "@/components/features"

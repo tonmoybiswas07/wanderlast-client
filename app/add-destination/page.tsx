@@ -33,6 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { authClient } from "@/lib/auth-client";
 
 const AddDestinationPage = () => {
   const router = useRouter();
@@ -54,6 +55,9 @@ const AddDestinationPage = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const {data,error} = await authClient.token()
+    const token = data?.token
+    
 
     const travelPackage = {
       destination: String(formData.get("destination") || "").trim(),
@@ -73,6 +77,7 @@ const AddDestinationPage = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization:`Bearer ${token}`
           },
           body: JSON.stringify(travelPackage),
         }

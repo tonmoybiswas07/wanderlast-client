@@ -41,7 +41,7 @@ const MyBookingPage = async () => {
   const user = session?.user;
 
   if (!user) {
-    redirect("/login");
+    redirect("/auth/signin");
   }
 
   if (!user.email) {
